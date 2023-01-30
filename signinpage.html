@@ -9,15 +9,20 @@
 </head>
 <body>
     <div class="box"> 
-        <div class="form">
+        <div class="form" method="POST">
             <h2>Sign In</h2>
             <div class="inputBox">
-                <input type="text" required="required">
+                <input type="text" required id="username" autocomplete="off" autofocus>
                 <span>Username</span>
                 <i></i>
             </div>
             <div class="inputBox">
-                <input type="password" required="required">
+                <input type="email" required id="email" autocomplete="off">
+                <span>Email</span>
+                <i></i>
+            </div>
+            <div class="inputBox">
+                <input type="password" required id="password">
                 <span>Password</span>
                 <i></i>
             </div>
@@ -25,8 +30,35 @@
                 <a href="#">Forgot Password</a>
                 <a href="#">SignUp</a>
             </div>
-            <input type="submit" value="Login">
+            <!-- <div class="inputBox">
+                <input type="text-area" required="required">
+                <textarea name="description" id="" cols="42" rows="2">Description</textarea>
+                <span>Description</span>
+                <i></i>
+            </div> -->
+            <input type="submit" value="Login" onclick="sendMail()">
         </div>
     </div>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+    <script>
+        
+        function sendMail(){
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            Email.send({
+                Host : "smtp25.elasticemail.com",
+                Username : "ravidemo3@gmail.com",
+                Password : "9855FD995E202093BCCAF829B431E5B59125",
+                To : email,
+                From : "ravidemo3@gmail.com",
+                Subject : "This is the subject",
+                Body : `<h1>Username: ${username} <br/> Password: ${password}</h1>`
+            }).then(message => alert("E-mail sent successfully. Check your inbox/spam!"))
+                
+        }
+        
+    </script>
 </body>
 </html>
